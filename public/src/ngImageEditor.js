@@ -1,5 +1,5 @@
 
-app.directive( 'ngImageEditor', ['$q', function( $q ){
+app.directive( 'ngImageEditor', ['$q', '$document', function( $q, $document ){
 
   var getImageSize = function( currentImg ){
 
@@ -36,11 +36,11 @@ app.directive( 'ngImageEditor', ['$q', function( $q ){
 
     scope:{
       imgSrc:"=",
-      ngImageEditor:"=",
+      ngImageEditor:"=?",
       onImgChange:"&",
-      enabledResizeSelector:"=",
-      enabledResizeAspectLock: '=',
-      enabledResizeCircle: '=',
+      enabledResizeSelector:"=?",
+      enabledResizeAspectLock: '=?',
+      enabledResizeCircle: '=?',
       imgSelected:"=",
       imgProps: '=',
       rotateDegrees: '='
@@ -98,7 +98,8 @@ app.directive( 'ngImageEditor', ['$q', function( $q ){
                 widthRate: overlay.widthRate
               });
             }
-            $scope.onImgChange();
+            $scope.onImgChange({imgSize:imgSize});
+
             //console.log( overlay.toDataURL( "image/png" , $scope.selected ) );
           });
 
@@ -124,7 +125,6 @@ app.directive( 'ngImageEditor', ['$q', function( $q ){
       $scope.$watch( 'imgSrc', watcher.imgSrc);
       $scope.$watch('rotateDegrees', watcher.rotateDegrees);
       $scope.$watchCollection('imgSelected', watcher.selected);
-
 
       angular.extend( $scope, {
 
@@ -274,6 +274,9 @@ app.directive( 'ngImageEditor', ['$q', function( $q ){
               }
             }
 
+            lastHeight = lastTop < 0 ? lastHeight + lastTop:lastHeight;
+            lastWidth = lastLeft < 0 ? lastWidth + lastLeft:lastWidth;
+
             this.resizeSelected( lastTop, lastLeft, lastWidth, lastHeight );
             $scope.resizeStartEvent = $event;
 
@@ -338,8 +341,12 @@ app.directive( 'ngImageEditor', ['$q', function( $q ){
         }
       });
 
-      $body.on( "mouseup", function(){
+      $document.on('mousemove', function( $event ){
+        $scope.move( $event );
+        $scope.$apply();
+      });
 
+      $document.on( "mouseup", function(){
         $scope.cancel();
       });
 

@@ -22,10 +22,10 @@
 		}
 	</style>
 </head>
-<body ng-app="ngImageEditor" ng-controller="testCtrl">
+<body ng-controller="testCtrl">
 
 
-	<div on-img-change="onImageChange()" class="ng-image-editor" selected="selected" img-src="imgSrc" ng-image-editor="imageEditor" ng-init="imgSrc='/images/head.jpeg'; selected = {width:150,height:150,top:0,left:0};" enabled-resize-selector = "enabledResizeSelector" ></div>
+	<div on-img-change="onImageChange(imgSize)" class="ng-image-editor" selected="selected" img-src="imgSrc" ng-image-editor="imageEditor" ng-init="imgSrc='/images/head.jpeg'; selected = {width:150,height:150,top:0,left:0};" enabled-resize-selector = "enabledResizeSelector" ></div>
 <img class="offset-1" ng-src="{{selectedBlock}}" alt="" />
 <div class="clear"></div>
 <br />
@@ -41,12 +41,13 @@ height:<input type="number" ng-model="selected.height" />
 
 <button type="button" ng-click="capture()" ng-disabled="!enabled">capture</button>
 
-	<script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="/angular/angular.min.js"></script>
     <script type="text/javascript" src="src/app.js"></script>
     <script type="text/javascript" src="src/Overlay.js"></script>
     <script type="text/javascript" src="src/ngImageEditor.js"></script>
 	<script type="text/javascript">
-		function testCtrl( $scope ){
+        var demoApp = angular.module( 'demo', ['ngImageEditor'] );
+        demoApp.controller( 'testCtrl', function( $scope ){
 
             $scope.enabledResizeSelector = true;
 
@@ -65,8 +66,11 @@ height:<input type="number" ng-model="selected.height" />
 				$scope.selectedBlock = $scope.imageEditor.toDataURL();
 			};
 
-			$scope.onImageChange = function(){console.log( 'img change' );}
-		}
+			$scope.onImageChange = function(size){
+              console.log( 'img change width:' + size.width + ' height:' + size.height );
+            }
+		});
+        angular.bootstrap( document, [demoApp.name] );
 	</script>
 </body>
 </html>

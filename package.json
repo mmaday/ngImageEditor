@@ -1,6 +1,6 @@
 {
-  "name": "ngImageEditor",
-  "version": "0.1.1",
+  "name": "ng-image-editor",
+  "version": "0.1.7",
   "description": "This is a image editor for angular.It can cut image.",
   "main": "dist/ngImageEditor",
   "keywords": [
@@ -9,6 +9,10 @@
     "editor",
     "capture"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SparrowJang/ngImageEditor"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-open": "~0.2.0",

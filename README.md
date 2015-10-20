@@ -11,12 +11,18 @@ This is a image editor for angular.It can cut image.
 
 ##Demo
 
-[demo](http://sparrowhome.twbbs.org/example/bower_components/ngImageEditor/public/index.html)
+[demo](http://www.sparrowjang.com/example/bower_components/ngImageEditor/public/index.html)
 
 ##Install
 
 ```
 bower install ngImageEditor
+```
+
+or
+
+```
+npm install ng-image-editor
 ```
 
 ##Support
@@ -66,7 +72,7 @@ $scope.imageEditor.toDataURL();
 
 ##Parameter
 
-###enabledResizeSelector
+###enabledResizeSelector(optonal:default false)
 >Set a resize selector to be enabled.
 
 Create a attribute to tag.
@@ -90,7 +96,7 @@ $scope.enabledResizeSelector = true;
 
 ##Event
 
-###on-image-change `Event`
+###on-image-change( imgSize ) `Event`
 >The image is loaded and rendered.
 
 ##Run
