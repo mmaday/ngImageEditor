@@ -100,7 +100,7 @@ app.directive( 'ngImageEditor', ['$q', '$document', function( $q, $document ){
             }
             $scope.onImgChange({imgSize:imgSize});
 
-            //console.log( overlay.toDataURL( "image/png" , $scope.selected ) );
+            //console.log( overlay.toDataURL( "image/png" , $scope.imgSelected ) );
           });
 
         },
@@ -171,7 +171,7 @@ app.directive( 'ngImageEditor', ['$q', '$document', function( $q, $document ){
                 x = resizeStartEvent.clientX - $event.clientX,
                 resizeDirection = $scope.resizeDirection,
                 aspectLock = $scope.enabledResizeAspectLock,
-                selected = $scope.selected,
+                selected = $scope.imgSelected,
                 absY, absX, maxXY,
                 lastTop, lastLeft, lastHeight, lastWidth;
 
